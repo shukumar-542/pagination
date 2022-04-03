@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+</head>
+<body>
+      {% for blog in page_obj %}
+      <h1>{{blog.title}}</h1>
+      <p>{{blog.des | truncatewords:30}} <a href="{% url 'post' blog.id %}">Read More</a></p>
+      <p>{{blog.date}}</p>
+      {% endfor %}
+
+      <div>
+            <span>
+                  {% if page_obj.has_previous %}
+                  <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+                  {% endif %}
+                  <span> Page {{page_obj.number}} Of {{page_obj.paginator.num_pages}}</span>
+                  {% if page_obj.has_next %}
+                  <a href="?page={{page_obj.next_page_number}}">Next</a>
+                  {% endif %}
+            </span>
+      </div>
+</body>
+</html>
